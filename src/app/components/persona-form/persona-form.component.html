@@ -1,0 +1,150 @@
+<div class="bg-white rounded-lg shadow-md p-6">
+  <h2 class="text-2xl font-bold text-gray-800 mb-6">Crear Persona</h2>
+
+  <form [formGroup]="personaForm" (ngSubmit)="onSubmit()">
+    <!-- Nombres -->
+    <div class="mb-4">
+      <label for="nombres" class="block text-sm font-medium text-gray-700 mb-2"> Nombres * </label>
+      <input
+        id="nombres"
+        type="text"
+        formControlName="nombres"
+        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+        [class.border-red-500]="nombres?.invalid && nombres?.touched"
+        placeholder="Ej: Juan Carlos"
+      />
+      @if (nombres?.invalid && nombres?.touched) {
+        <div class="text-red-500 text-sm mt-1">
+          @if (nombres?.errors?.['required']) {
+            <span>Los nombres son obligatorios</span>
+          }
+          @if (nombres?.errors?.['maxlength']) {
+            <span>Máximo 100 caracteres</span>
+          }
+        </div>
+      }
+    </div>
+
+    <!-- Apellidos -->
+    <div class="mb-4">
+      <label for="apellidos" class="block text-sm font-medium text-gray-700 mb-2">
+        Apellidos *
+      </label>
+      <input
+        id="apellidos"
+        type="text"
+        formControlName="apellidos"
+        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+        [class.border-red-500]="apellidos?.invalid && apellidos?.touched"
+        placeholder="Ej: Pérez González"
+      />
+      @if (apellidos?.invalid && apellidos?.touched) {
+        <div class="text-red-500 text-sm mt-1">
+          @if (apellidos?.errors?.['required']) {
+            <span>Los apellidos son obligatorios</span>
+          }
+          @if (apellidos?.errors?.['maxlength']) {
+            <span>Máximo 100 caracteres</span>
+          }
+        </div>
+      }
+    </div>
+
+    <!-- Tipo Identificación -->
+    <div class="mb-4">
+      <label for="tipoIdentificacion" class="block text-sm font-medium text-gray-700 mb-2">
+        Tipo de Identificación *
+      </label>
+      <select
+        id="tipoIdentificacion"
+        formControlName="tipoIdentificacion"
+        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+        [class.border-red-500]="tipoIdentificacion?.invalid && tipoIdentificacion?.touched"
+      >
+        <option value="">Seleccione...</option>
+        @for (tipo of tiposIdentificacion; track tipo.value) {
+          <option [value]="tipo.value">{{ tipo.label }}</option>
+        }
+      </select>
+      @if (tipoIdentificacion?.invalid && tipoIdentificacion?.touched) {
+        <div class="text-red-500 text-sm mt-1">Campo obligatorio</div>
+      }
+    </div>
+
+    <!-- Número Identificación -->
+    <div class="mb-4">
+      <label for="numeroIdentificacion" class="block text-sm font-medium text-gray-700 mb-2">
+        Número de Identificación *
+      </label>
+      <input
+        id="numeroIdentificacion"
+        type="text"
+        formControlName="numeroIdentificacion"
+        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+        [class.border-red-500]="numeroIdentificacion?.invalid && numeroIdentificacion?.touched"
+        placeholder="Ej: 1234567890"
+      />
+      @if (numeroIdentificacion?.invalid && numeroIdentificacion?.touched) {
+        <div class="text-red-500 text-sm mt-1">
+          @if (numeroIdentificacion?.errors?.['required']) {
+            <span>El número es obligatorio</span>
+          }
+          @if (numeroIdentificacion?.errors?.['maxlength']) {
+            <span>Máximo 50 caracteres</span>
+          }
+        </div>
+      }
+    </div>
+
+    <!-- Email -->
+    <div class="mb-6">
+      <label for="email" class="block text-sm font-medium text-gray-700 mb-2"> Email * </label>
+      <input
+        id="email"
+        type="email"
+        formControlName="email"
+        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+        [class.border-red-500]="email?.invalid && email?.touched"
+        placeholder="ejemplo@correo.com"
+      />
+      @if (email?.invalid && email?.touched) {
+        <div class="text-red-500 text-sm mt-1">
+          @if (email?.errors?.['required']) {
+            <span>El email es obligatorio</span>
+          }
+          @if (email?.errors?.['email']) {
+            <span>Email inválido</span>
+          }
+          @if (email?.errors?.['maxlength']) {
+            <span>Máximo 200 caracteres</span>
+          }
+        </div>
+      }
+    </div>
+
+    <!-- Mensajes -->
+    @if (successMessage) {
+      <div class="mb-4 p-3 bg-green-100 border border-green-400 text-green-700 rounded-lg">
+        {{ successMessage }}
+      </div>
+    }
+    @if (errorMessage) {
+      <div class="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded-lg">
+        {{ errorMessage }}
+      </div>
+    }
+
+    <!-- Botón Submit -->
+    <button
+      type="submit"
+      [disabled]="personaForm.invalid || isLoading"
+      class="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 text-white font-semibold py-3 rounded-lg transition duration-200"
+    >
+      @if (isLoading) {
+        <span>Creando...</span>
+      } @else {
+        <span>Crear Persona</span>
+      }
+    </button>
+  </form>
+</div>
