@@ -97,7 +97,7 @@
     </div>
 
     <!-- Email -->
-    <div class="mb-6">
+    <div class="mb-4">
       <label for="email" class="block text-sm font-medium text-gray-700 mb-2"> Email * </label>
       <input
         id="email"
@@ -117,6 +117,28 @@
           }
           @if (email?.errors?.['maxlength']) {
             <span>Máximo 200 caracteres</span>
+          }
+        </div>
+      }
+    </div>
+
+    <!-- Número Celular -->
+    <div class="mb-6">
+      <label for="numeroCelular" class="block text-sm font-medium text-gray-700 mb-2">
+        Número Celular
+      </label>
+      <input
+        id="numeroCelular"
+        type="tel"
+        formControlName="numeroCelular"
+        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+        [class.border-red-500]="numeroCelular?.invalid && numeroCelular?.touched"
+        placeholder="Ej: +57 300 1234567"
+      />
+      @if (numeroCelular?.invalid && numeroCelular?.touched) {
+        <div class="text-red-500 text-sm mt-1">
+          @if (numeroCelular?.errors?.['maxlength']) {
+            <span>Máximo 20 caracteres</span>
           }
         </div>
       }

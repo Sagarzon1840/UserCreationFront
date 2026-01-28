@@ -34,6 +34,7 @@ export class PersonaFormComponent {
       numeroIdentificacion: ['', [Validators.required, Validators.maxLength(50)]],
       email: ['', [Validators.required, Validators.email, Validators.maxLength(200)]],
       tipoIdentificacion: ['', Validators.required],
+      numeroCelular: ['', [Validators.maxLength(20)]],
     });
   }
 
@@ -84,5 +85,8 @@ export class PersonaFormComponent {
   }
   get tipoIdentificacion() {
     return this.personaForm.get('tipoIdentificacion');
+  }
+  get numeroCelular() {
+    return this.personaForm.get('numeroCelular');
   }
 }

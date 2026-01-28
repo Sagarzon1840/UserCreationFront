@@ -5,6 +5,7 @@ export interface CreatePersonaRequest {
   numeroIdentificacion: string;
   email: string;
   tipoIdentificacion: string;
+  numeroCelular: string;
 }
 
 export interface PersonaResponse {
@@ -17,4 +18,5 @@ export interface PersonaResponse {
   fechaCreacion: string;
   idCompleto: string;
   nombreCompleto: string;
+  numeroCelular: string;
 }
